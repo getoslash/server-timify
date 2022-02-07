@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/getoslash/server-timify/compare/v1.0.0...v1.0.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* **typescript:** generate type declarations for the package ([b7aba0c](https://github.com/getoslash/server-timify/commit/b7aba0c8b0eb41c586b046a1c65a319ed7fdc26a))
+
 # 1.0.0 (2022-02-07)
 
 
