@@ -16,7 +16,7 @@
     "lint": "eslint --report-unused-disable-directives --cache '**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
     "typecheck": "tsc --noEmit",
-    "build": "tsup",
+    "build": "tsup --dts",
     "test": "tap --rcfile=./test/.taprc",
     "test:only": "TAP_ONLY=1 npm run test",
     "coverage": "npm run test -- --check-coverage --coverage-report=lcovonly --coverage-report=cobertura --coverage-report=text --coverage-report=text-summary",
