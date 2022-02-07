@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/server-timify)](https://npmjs.com/package/server-timify)
 [![npm size](https://img.shields.io/bundlephobia/minzip/server-timify)](https://bundlephobia.com/package/server-timify)
 [![install size](https://packagephobia.com/badge?p=server-timify)](https://packagephobia.com/result?p=server-timify)
-[![code coverage](https://codecov.io/gh/getoslash/server-timify/branch/main/graph/badge.svg?token=VBS5M4qYfz)](https://codecov.io/gh/getoslash/server-timify)
+[![code coverage](https://codecov.io/gh/getoslash/server-timify/branch/main/graph/badge.svg?token=KwmPlHEFwd)](https://codecov.io/gh/getoslash/server-timify)
 [![Release](https://github.com/getoslash/server-timify/actions/workflows/release.yml/badge.svg?event=push)](https://github.com/getoslash/server-timify/actions/workflows/release.yml)
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/getoslash/server-timify)
 
