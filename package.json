@@ -1,6 +1,6 @@
 {
   "name": "server-timify",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Parser for the Server-Timing header",
   "license": "MIT",
   "repository": "https://github.com/getoslash/server-timify",
