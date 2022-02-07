@@ -39,7 +39,10 @@ export const parse = (timingHeader: string): ServerTimings => {
       },
     ]
 
-  const metrics = timingHeader.slice().split(',').map((_) => _.trim())
+  const metrics = timingHeader
+    .slice()
+    .split(',')
+    .map((_) => _.trim())
   metrics.forEach((metric) => {
     const timing: ServerTiming = {
       name: '',
