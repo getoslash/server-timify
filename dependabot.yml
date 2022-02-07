@@ -1,0 +1,19 @@
+# See https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "chore:deps"
+    commit-message:
+      prefix: "chore(deps)"
+    assignees:
+      - "paambaati"
+    reviewers:
+      - "paambaati"
+    ignore:
+      - dependency-name: "@types/node"
+        versions: ["17.x"] # Targeting only v16.x, as that is the LTS release.

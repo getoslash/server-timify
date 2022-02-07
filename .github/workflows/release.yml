@@ -1,0 +1,80 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '!*'
+
+jobs:
+  pre-release:
+    name: pre-release
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip release') && !contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Check code for leaks
+      uses: zricethezav/gitleaks-action@master
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    - name: Check linting
+      run: npm run lint
+    - name: Check types
+      run: npm run typecheck
+    - name: Run tests and collect coverage
+      run: npm run coverage
+    - name: Upload code coverage
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: coverage
+        flags: unittests
+        fail_ci_if_error: true
+        verbose: true
+
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    needs: [ pre-release ]
+    if: "!contains(github.event.head_commit.message, 'skip release') && !contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install dependencies
+      run: npm ci
+    - name: Import OSlash bot's GPG key for signing commits
+      id: import-gpg
+      uses: crazy-max/ghaction-import-gpg@v4
+      with:
+        gpg_private_key: ${{ secrets.OSLASH_BOT_GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.OSLASH_BOT_GPG_PASSPHRASE }}
+        git_config_global: true
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+    - name: Kick off release
+      run: npm_config_yes=true npx semantic-release
+      env:
+        NPM_USERNAME: oslashbot
+        NPM_EMAIL: ${{ steps.import-gpg.outputs.email }}
+        NPM_TOKEN: ${{ secrets.OSLASH_BOT_NPM_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.OSLASH_BOT_NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.OSLASH_BOT_GITHUB_TOKEN }}
+        GIT_AUTHOR_NAME: ${{ steps.import-gpg.outputs.name }}
+        GIT_AUTHOR_EMAIL: ${{ steps.import-gpg.outputs.email }}
+        GIT_COMMITTER_NAME: ${{ steps.import-gpg.outputs.name }}
+        GIT_COMMITTER_EMAIL: ${{ steps.import-gpg.outputs.email }}

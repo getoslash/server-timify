@@ -1,0 +1,68 @@
+{
+  "name": "server-timify",
+  "version": "0.0.0",
+  "description": "Parser for the Server-Timing header",
+  "license": "MIT",
+  "repository": "https://github.com/getoslash/server-timify",
+  "private": false,
+  "author": {
+    "name": "GP",
+    "email": "gp@oslash.com"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "scripts": {
+    "lint": "eslint --report-unused-disable-directives --cache '**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "test": "tap --rcfile=./test/.taprc",
+    "test:only": "TAP_ONLY=1 npm run test",
+    "coverage": "npm run test -- --check-coverage --coverage-report=lcovonly --coverage-report=cobertura --coverage-report=text --coverage-report=text-summary",
+    "release": "semantic-release",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/index.js",
+  "keywords": [
+    "server-timing",
+    "performance",
+    "performanceservertiming",
+    "timings",
+    "header",
+    "parse",
+    "stringify"
+  ],
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "1.0.2",
+    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.0.2",
+    "@semantic-release/npm": "9.0.0",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "@swc/core": "1.2.136",
+    "@types/node": "16.11.22",
+    "@types/tap": "15.0.5",
+    "@typescript-eslint/eslint-plugin": "5.10.2",
+    "@typescript-eslint/parser": "5.10.2",
+    "eslint": "8.8.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "16.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "prettier": "2.5.1",
+    "tap": "15.1.6",
+    "ts-node": "10.4.0",
+    "tsup": "5.11.13",
+    "typescript": "4.5.5"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  }
+}
