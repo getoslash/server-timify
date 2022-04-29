@@ -4,7 +4,8 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "tap"
   ],
   "extends": [
     "eslint:recommended",
